@@ -4,38 +4,38 @@ class UsuarioControlador {
   static async crearCliente(req, res) {
     const { t1: doc, t2: name, t3: tel, t4: email, t5: contra } = req.body;
     
-    const errorCampos = ClienteControlador.verCampos(doc, name, tel, email, contra);
+    const errorCampos = UsuarioControlador.verCampos(doc, name, tel, email, contra);
     if (errorCampos) {
       return res.status(400).json({ error: errorCampos });
     }
       
-    const erorIde = ClienteControlador.verIde(doc);
+    const erorIde = UsuarioControlador.verIde(doc);
     if (erorIde) {
         return res.status(400).json({ error: erorIde });
     }
     
-    const errornom = ClienteControlador.vernom(name);
+    const errornom = UsuarioControlador.vernom(name);
     if (errornom) {
         return res.status(400).json({ error: errornom });
     }
     
-    const errortel = ClienteControlador.verTel(tel);
+    const errortel = UsuarioControlador.verTel(tel);
     if (errortel) {
         return res.status(400).json({ error: errortel });
     }
     
-    const errorem = ClienteControlador.veremail(email);
+    const errorem = UsuarioControlador.veremail(email);
     if (errorem) {
         return res.status(400).json({ error: errorem });
     }
     
-    const errorkey = ClienteControlador.verkey(contra);
+    const errorkey = UsuarioControlador.verkey(contra);
     if (errorkey) {
         return res.status(400).json({ error: errorkey });
     }
     
     try {
-      const result = await modelo.crearClientes(doc, name, tel, email, contra);
+      const result = await modelo.crearUsuarios(doc, name, tel, email, contra);
       res.status(201).json({ mensaje: 'Usuario creado', id: result.insertId });
     } catch (err) {
       if (err.message.includes("Duplicate entry")) {

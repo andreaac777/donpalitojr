@@ -2,8 +2,7 @@ const dbService = require('./bd/Conexion');
 const bcrypt = require('bcrypt');
 
 class LoginModelo {
-  
-  // Buscar usuario por correo
+   // Buscar usuario por correo
   static async buscaCorreo(email) {
     const query = 'SELECT * FROM usuarios WHERE correo = ?';
     try {
@@ -15,8 +14,8 @@ class LoginModelo {
   }
 
   // Validar correo y contraseña
-  static async validarCredenciales(email, contra) {
-    if (!email || !contra) {
+  static async validarCredenciales(email, password) {
+    if (!email || !password) {
       throw new Error('Correo y contraseña son obligatorios');
     }
 
@@ -27,10 +26,11 @@ class LoginModelo {
       }
 
       // Comparar la contraseña encriptada
-      const match = await bcrypt.compare(contra, usuario.contrasena); // Cambiado a "contrasena"
+      const match = await bcrypt.compare(password, usuario.contrasena); // Cambiado a "contrasena"
       if (!match) {
         return null; // Contraseña incorrecta
       }
+
       return usuario; // Credenciales correctas
     } catch (err) {
       throw new Error(`Error al validar credenciales: ${err.message}`);

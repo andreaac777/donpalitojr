@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const registrousuario = require('./vista/UsuarioVista');
+const registro = require('./vista/UsuarioVista');
 const productos = require('./vista/ArticuloVista');
 const login = require('./vista/LoginVista');
 const carrito = require('./vista/CarritoVista');
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 //app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutas 
-app.use('/', registrousuario);
+app.use('/', registro);
 app.use('/', productos);
 app.use('/', login);
 app.use('/', carrito);
